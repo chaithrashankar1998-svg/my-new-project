@@ -1,29 +1,42 @@
 import random
 
-def start_game():
-    number = random.randint(1, 100)
-    attempts = 0
+choices = ["rock", "paper", "scissors"]
 
-    print("🎯 Welcome to Guess My Number!")
-    print("I am thinking of a number between 1 and 100.")
+def play_game():
+    computer = random.choice(choices)
 
-    while True:
-        guess = int(input("Enter your guess: "))
-        attempts += 1
+    print("Rock, Paper, Scissors Game")
+    player = input("Enter rock, paper, or scissors: ").lower()
 
-        if guess < number:
-            print("📉 Too low! Try again.")
+    if player not in choices:
+        print("Invalid choice!")
+        return
 
-        elif guess > number:
-            print("📈 Too high! Try again.")
+    print("Computer chose:", computer)
 
-        else:
-            print(f"🎉 Correct! You guessed it in {attempts} attempts.")
-            break
-from game import start_game
+    if player == computer:
+        print("It's a tie!")
+
+    elif (
+        (player == "rock" and computer == "scissors") or
+        (player == "paper" and computer == "rock") or
+        (player == "scissors" and computer == "paper")
+    ):
+        print("🎉 You win!")
+
+    else:
+        print("💻 Computer wins!")
+
+from game import play_game
 
 def main():
-    start_game()
+    while True:
+        play_game()
+
+        again = input("Play again? (yes/no): ").lower()
+        if again != "yes":
+            print("Thanks for playing!")
+            break
 
 if __name__ == "__main__":
-    main()
+    main()       
